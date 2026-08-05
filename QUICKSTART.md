@@ -35,6 +35,6 @@ Welcome to the Masternaka i3wm setup.
 ## Getting help
 
 - Press `Super + /` — searchable keybind reference
-- Repo: <https://codeberg.org/Masternaka/master-i3wm.git>
+- Repo: <https://github.com/Masternaka/masternaka-i3wm>
 
 Delete this file (`rm ~/QUICKSTART-i3.md`) whenever you're done with it.

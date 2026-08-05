@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Masternaka - i3wm Configuration
-# https://codeberg.org/Masternaka/master-i3wm.git (Base on justaguylinux i3 setup)
+# masternaka-i3wm Configuration
+# https://github.com/Masternaka/masternaka-i3wm
 
 set -e
 
@@ -72,7 +72,7 @@ if [ "$ONLY_CONFIG" = false ]; then
 
     # Add butterrepo for picom, rofi and other packages
     msg "Checking butterrepo..."
-    wget -qO- "https://codeberg.org/justaguylinux/butterscripts/raw/branch/main/setup/add_butterrepo.sh" | bash
+    wget -qO- "https://justaguy.dev/drew/butterscripts/raw/branch/main/setup/add_butterrepo.sh" | bash
 else
     msg "Skipping system update (--only-config mode)"
 fi
@@ -90,7 +90,7 @@ PACKAGES_UI=(
 
 PACKAGES_FILE_MANAGER=(
     thunar thunar-archive-plugin thunar-volman
-    gvfs-backends dialog mtools smbclient cifs-utils fd-find unzip
+    gvfs-backends gvfs-fuse dialog mtools smbclient cifs-utils fd-find unzip
 )
 
 PACKAGES_AUDIO=(
@@ -193,7 +193,7 @@ fi
 
 # Butterscript helper
 get_script() {
-    wget -qO- "https://codeberg.org/justaguylinux/butterscripts/raw/branch/main/$1" | bash
+    wget -qO- "https://justaguy.dev/drew/butterscripts/raw/branch/main/$1" | bash
 }
 
 # Install essential components
@@ -224,7 +224,7 @@ if [ "$ONLY_CONFIG" = false ]; then
     fi
 
     msg "Downloading display manager installer..."
-    wget -O "$TEMP_DIR/install_lightdm.sh" "https://codeberg.org/justaguylinux/butterscripts/raw/branch/main/system/install_lightdm.sh"
+    wget -O "$TEMP_DIR/install_lightdm.sh" "https://justaguy.dev/drew/butterscripts/raw/branch/main/system/install_lightdm.sh"
     chmod +x "$TEMP_DIR/install_lightdm.sh"
     msg "Running display manager installer..."
     # Run in current terminal session to preserve interactivity
@@ -236,7 +236,7 @@ if [ "$ONLY_CONFIG" = false ]; then
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         msg "Downloading optional tools installer..."
-        wget -O "$TEMP_DIR/optional_tools.sh" "https://codeberg.org/justaguylinux/butterscripts/raw/branch/main/setup/optional_tools.sh"
+        wget -O "$TEMP_DIR/optional_tools.sh" "https://justaguy.dev/drew/butterscripts/raw/branch/main/setup/optional_tools.sh"
         chmod +x "$TEMP_DIR/optional_tools.sh"
         msg "Running optional tools installer..."
         # Run in current terminal session to preserve interactivity
