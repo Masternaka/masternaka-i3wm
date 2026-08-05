@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# Termine les instances déjà en cours
+killall -q polybar
+
+# Attend que polybar soit bien arrêté
+while pgrep -x polybar > /dev/null; do sleep 1; done
+
+# Laisse le temps aux moniteurs d'être prêts (utile si appelé sans autostart.sh)
+sleep 1
+
+# Récupère la liste des moniteurs connectés
+monitors=($(polybar --list-monitors | cut -d":" -f1))
+
+# Premier moniteur → barre primaire (avec tray)
+if [ ${#monitors[@]} -ge 1 ]; then
+    MONITOR=${monitors[0]} polybar -c ~/.config/i3/polybar/config.ini primary &
+fi
+
+# Moniteurs suivants → barre secondaire (sans tray)
+for i in "${!monitors[@]}"; do
+    if [ $i -gt 0 ]; then
+        MONITOR=${monitors[$i]} polybar -c ~/.config/i3/polybar/config.ini secondary &
+    fi
+done

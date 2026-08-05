@@ -1,0 +1,7 @@
+##### Environment variables file for i3, must be placed in ~/etc/environment #####
+
+QT_QPA_PLATFORMTHEME=qt5ct
+QT_STYLE_OVERRIDE=kvantum # Changer pour votre thème
+GTK_THEME=Arc--Dark # Changer pour votre thème
+EDITOR=micro
+BROWSER=firefox
