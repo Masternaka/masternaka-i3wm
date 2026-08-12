@@ -1,188 +1,189 @@
 # 🪟 masternaka-i3wm
 
+Une configuration i3wm complète, moderne et modulaire pour les systèmes basés sur Debian/Ubuntu. Elle inclut tous les paquets essentiels, une gestion dynamique de thèmes et des raccourcis clavier optimisés, prêts à l'emploi dès l'installation.
+
 ---
 
 ## 🚀 Installation
 
-### Quick Install
+### Installation rapide
+
 ```bash
-git clone git@github.com:Masternaka/masternaka-i3wm.git
+git clone https://github.com/Masternaka/masternaka-i3wm.git
 cd masternaka-i3wm
 chmod +x install.sh
 ./install.sh
 ```
 
-### Installation Options
+### Options d'installation
 
-The installer supports the following options:
+Le script d'installation prend en charge plusieurs options :
 
 ```bash
 ./install.sh [OPTIONS]
 
-Options:
-  --only-config      Only copy config files (skip packages and external tools)
-  --help             Show help message
+Options :
+  --only-config      Copie uniquement les fichiers de configuration (ignore l'installation des paquets et outils externes)
+  --help             Affiche le message d'aide
 ```
 
-**Features:**
-- **Streamlined installation**: Simpler, more reliable installation process
-- **Better error handling**: Installation fails fast on errors to prevent partial setups
-
-**Package Installation:** Packages are installed in logical groups (core, UI, file manager, audio, utilities, terminal, fonts) for better organization.
-
-# Copy configuration files
-./install.sh --only-config
-```
-
-</details>
-
-### Advanced Usage Examples
+**Exemples d'utilisation :**
 
 ```bash
-# Update only configuration files (useful for non-Debian systems)
+# Appliquer ou mettre à jour uniquement la configuration i3 (utile si les paquets sont déjà installés)
 ./install.sh --only-config
 ```
 
-**Note:** The script can be run from any location - it automatically detects its directory.
+**Caractéristiques de l'installateur :**
+- **Installation structurée** : Installation propre et fiable avec vérification automatique à chaque étape.
+- **Organisation par paquets** : Les paquets requis sont regroupés logiquement (noyau, interface, gestionnaire de fichiers, audio, utilitaires, terminal, polices, outils de compilation).
+- **Gestion des configurations existantes** : Détecte une configuration `~/.config/i3` existante et propose une sauvegarde automatique avant remplacement.
+- **Aide au premier démarrage** : Copie automatique du guide de démarrage rapide dans `~/QUICKSTART-i3.md`.
 
 ---
 
-## 📦 What It Installs
+## 📦 Composants installés
 
-| Component             | Purpose                          |
-|------------------------|----------------------------------|
-| `i3`                  | Tiling window manager            |
-| `sxhkd`               | Hotkey daemon                    |
-| `picom` `(yshui)`     | Compositor for transparency      |
-| `polybar`             | Status bar                       |
-| `rofi`                | Application launcher             |
-| `dunst`               | Notifications                    |
-| `kitty`               | Terminal emulator                |
-| `firefox-esr`         | Default web browser              |
-| `thunar` + plugins    | File manager                     |
-| `nala`                | Better apt frontend              |
-| `pipewire`            | Audio handling                   |
-| `flameshot`,          | Screenshot tools                 |
-| `qimgv`               | Lightweight image viewer         |
-| `fzf`, etc.           | Utilities & enhancements         |
-
-
----
-
-## 🎨 Appearance & Theming
-
-- 12 built-in themes with matching wallpapers, swappable on the fly
-- Polybar with optimized layout: system info (left), workspaces (center), controls (right)
-- Enhanced polybar with multiple font support (Roboto Mono, FontAwesome, Hack Nerd Font)
-- Dunst, rofi, and GTK themes preconfigured
-- Wallpapers stored in `~/.config/i3/wallpaper`
-- GTK Theme: [Orchis](https://github.com/vinceliuice/Orchis-theme)
-- Icon Theme: [Colloid](https://github.com/vinceliuice/Colloid-icon-theme)
-
-### Theme Switcher
-
-Launch with `Super + Shift + T` (rofi menu) to swap the full desktop theme in one shot. The switcher updates i3 colors, polybar, wallpaper, dunst, rofi, kitty, and GTK theme + icons together.
-
-Available themes: Catppuccin, Doom One, Dracula, Everforest, GitHub Dark, Gruvbox, Kanagawa, Monokai, Moonfly, Nord, Retro.
+| Composant | Description / Rôle |
+|---|---|
+| `i3` | Gestionnaire de fenêtres en pavage (Tiling Window Manager) |
+| `sxhkd` | Démon de gestion des raccourcis clavier |
+| `picom` | Compositeur de fenêtres (effets visuels, transparence, ombres) |
+| `polybar` | Barre d'état hautement personnalisée et dynamique |
+| `rofi` | Lanceur d'applications, menu de thèmes et menu d'extinction |
+| `dunst` | Démon de gestion des notifications système |
+| `kitty` | Émulateur de terminal principal et terminal escamotable (scratchpad) |
+| `firefox` / `firefox-esr` | Navigateur Web par défaut |
+| `thunar` (+ plugins `gvfs`) | Gestionnaire de fichiers graphique complet |
+| `pipewire` / `pamixer` / `pulsemixer` | Gestion globale et mixage du flux audio |
+| `flameshot` | Outil de capture d'écran interactif |
+| `qimgv` | Visionneuse d'images rapide et légère |
+| `autotiling` | Basculement automatique du pavage (horizontal / vertical) |
+| `variety` / `feh` | Gestion et affichage des fonds d'écran |
+| `lxpolkit` / `xsettingsd` / `nwg-look` | Agent d'authentification PolicyKit et gestion du thème GTK |
 
 ---
 
-## 🔑 Keybindings Overview
+## 🎨 Apparence & Thèmes
 
-| Key Combo              | Action                                |
-|------------------------|----------------------------------------|
-| `Super + Enter`        | Launch terminal (kitty)                |
-| `Super + Shift + Enter`| Toggle scratchpad terminal             |
-| `Super + Space`        | Launch rofi                            |
-| `Super + B`            | Launch Firefox                         |
-| `Super + Q`            | Close focused window                   |
-| `Super + /`            | Help via keybind viewer                |
-| `Super + Shift + T`    | Theme switcher                         |
-| `Super + Alt + A`      | Audio mixer (pulsemixer) in scratchpad |
-| `Super + X`            | Power menu (shutdown/reboot/logout)    |
-| `Print` / `Super + s`  | Screenshot (fullscreen)                |
-| `Super + Print` / `Super + Shift + s` | Screenshot (region select) |
-| `Super + Shift + R`    | Reload i3 config                       |
-| `Super + 1-0, -, =`    | Switch to workspace 1-12               |
-| `Super + Shift + 1-0, -, =` | Move window to workspace 1-12     |
-| `Super + W`            | Tabbed layout                          |
-| `Super + T`            | Cycle layout (split → tabbed → stacking) |
-| `Alt + Tab` / `Alt + Shift + Tab` | Cycle siblings / tabs        |
+- **12 thèmes intégrés** avec fonds d'écran assortis, interchangeables à la volée.
+- **Polybar optimisée** : affichage modulaire comprenant les informations système à gauche, les espaces de travail au centre et les raccourcis/date/heure à droite.
+- **Prise en charge multi-polices** : intégration de JetBrains Mono Nerd Font, FontAwesome et Roboto.
+- **Thèmes GTK et icônes** : configurés automatiquement pour une cohérence visuelle complète.
+- **Fonds d'écran** : stockés directement dans `~/.config/i3/wallpaper`.
 
-Keybindings are configured via:
+### Sélecteur de thèmes dynamique
 
+Lancez le sélecteur avec **`Super + Maj + T`** (menu Rofi) pour changer l'intégralité du thème en un clic. Le script met à jour instantanément les couleurs d'i3, Polybar, Rofi, Dunst, Kitty, le thème GTK, les icônes et le fond d'écran.
+
+**Thèmes disponibles (12) :**
+- Catppuccin
+- Doom One
+- Dracula
+- Everforest
+- GitHub Dark
+- Gruvbox
+- Kanagawa
+- Monokai
+- Moonfly
+- Nord
+- Retro
+- Rose Pine
+
+---
+
+## 🔑 Raccourcis clavier principaux
+
+| Combinaison | Action |
+|---|---|
+| `Super + Entrée` | Lancer le terminal (`kitty`) |
+| `Super + Maj + Entrée` | Masquer / Afficher le terminal escamotable (*scratchpad*) |
+| `Super + Espace` | Lancer le menu d'applications (`rofi`) |
+| `Super + B` | Lancer le navigateur Web (`Firefox`) |
+| `Super + Maj + B` | Lancer Firefox en mode privé |
+| `Super + F` | Lancer le gestionnaire de fichiers (`Thunar`) |
+| `Super + E` | Lancer l'éditeur de texte (`Geany`) |
+| `Super + Q` | Fermer la fenêtre active |
+| `Super + /` | Afficher l'aide interactive des raccourcis |
+| `Super + Maj + T` | Ouvrir le sélecteur de thèmes |
+| `Super + Alt + A` | Ouvrir le mélangeur audio (`pulsemixer` en scratchpad) |
+| `Super + X` | Menu d'extinction (éteindre / redémarrer / déconnexion) |
+| `Impr écran` / `Super + S` | Capture d'écran (plein écran) |
+| `Super + Maj + S` | Capture d'écran (sélection de zone avec Flameshot) |
+| `Super + Maj + R` | Recharger la configuration i3 |
+| `Super + Échap` | Recharger la configuration sxhkd |
+| `Super + 1-0, -, =` | Basculer vers l'espace de travail 1 à 12 |
+| `Super + Maj + 1-0, -, =` | Déplacer la fenêtre vers l'espace de travail 1 à 12 |
+| `Super + H / J / K / L` | Déplacer le focus (gauche / bas / haut / droite) |
+| `Super + Maj + H / J / K / L` | Déplacer la fenêtre (gauche / bas / haut / droite) |
+| `Super + Ctrl + H / J / K / L` | Redimensionner la fenêtre |
+| `Super + Maj + Espace` | Basculer la fenêtre en mode flottant |
+| `Super + Maj + F` | Basculer la fenêtre en plein écran |
+| `Super + W` | Disposition en onglets (*tabbed*) |
+| `Super + T` | Alterner la disposition (split → tabbed → stacking) |
+| `Alt + Tab` / `Alt + Maj + Tab` | Naviguer entre les fenêtres / onglets |
+
+Les raccourcis clavier sont gérés et configurés via :
 - `~/.config/i3/sxhkd/sxhkdrc`
-- `~/.config/i3/scripts/help` (run manually or with `Super + /`)
+- `~/.config/i3/scripts/help` (exécutable via `Super + /`)
 
-On first login, a welcome notification points to `~/QUICKSTART-i3.md` — a short cheat sheet you can delete when you're comfortable.
-
-> **Note:** sxhkd only reliably binds keys in the `a-z` / standard ASCII range. If you use a non-US keyboard layout (German, French, Russian, Japanese, etc.), bindings that involve characters outside that range may not fire. You'll need to rework the relevant `sxhkdrc` entries to use keysyms that exist on your layout, or remove them.
+> **Remarque pour les claviers non-US (AZERTY, etc.) :** `sxhkd` associe les touches selon la disposition ASCII standard. Si vous utilisez une disposition de clavier francophone, utilisez `Super + /` pour vérifier l'attribution ou adaptez les entrées dans `~/.config/i3/sxhkd/sxhkdrc`.
 
 ---
 
-## 📂 Configuration Files
+## 📂 Structure des fichiers de configuration
 
 ```
 ~/.config/i3/
-├── config                 # Main i3 config
-├── workspaces.conf        # Workspace definitions
-├── rules.conf             # Window rules and appearance
+├── config                 # Fichier de configuration principal d'i3
+├── workspaces.conf        # Configuration des 12 espaces de travail
+├── rules.conf             # Règles des fenêtres, bordures, marges (gaps) et scratchpads
+├── colors.conf            # Fichier de couleurs du thème actif
 ├── sxhkd/
-│   └── sxhkdrc            # Keybinding configuration
+│   └── sxhkdrc            # Configuration centralisée des raccourcis clavier
 ├── polybar/
-│   ├── config.ini
-│   └── polybar-i3
+│   ├── config.ini         # Configuration de la barre Polybar
+│   ├── colors.ini         # Thème de couleurs Polybar
+│   └── polybar-i3         # Script de lancement de Polybar
 ├── dunst/
-│   └── dunstrc
+│   └── dunstrc            # Configuration du démon de notifications
 ├── rofi/
-│   ├── config.rasi
-│   ├── keybinds.rasi
-│   └── power.rasi
+│   ├── config.rasi        # Configuration du lanceur Rofi
+│   ├── keybinds.rasi     # Interface d'aide des raccourcis
+│   ├── power.rasi        # Menu d'extinction
+│   └── colors.rasi       # Thème de couleurs Rofi
 ├── picom/
-│   └── picom.conf
+│   └── picom.conf         # Configuration du compositeur visuel
 ├── scripts/
-│   ├── autostart.sh
-│   ├── changevolume
-│   ├── power
-│   ├── scratchpad
-│   └── help
-├── wallpaper/
-│   └── (wallpaper images)
-```
-
-### Terminal Configuration
-
-Both roles use kitty:
-- **Main terminal** (`Super + Enter`): kitty
-- **Scratchpad terminal** (`Super + Shift + Enter`): a class-tagged kitty window toggled via i3's scratchpad
-
-**Advanced scratchpad usage:**
-```bash
-# Launch custom applications in scratchpad mode
-Super + Shift + Enter    # Default terminal scratchpad
-Super + Alt + A          # Pulsemixer scratchpad
-# Or via script: scratchpad app_name app_command
+│   ├── autostart.sh       # Script de démarrage automatique des démons
+│   ├── changevolume       # Script de gestion du volume sonore
+│   ├── help               # Visualiseur interactif des raccourcis clavier
+│   ├── power              # Script du menu de gestion d'énergie
+│   ├── scratchpad         # Gestionnaire de fenêtres escamotables
+│   └── thememenu          # Script de changement de thème en direct
+└── themes/                # Définitions des 12 thèmes préconfigurés
 ```
 
 ---
 
-## 🔍 HiDPI / 4K Displays
+## 🔍 Écrans HiDPI / 4K
 
-Tiny type on a 4K screen? There's no single scaling knob — each toolkit (X fonts, GTK, Qt, the cursor) has to be told separately. `~/.config/i3/scripts/autostart.sh` ships a commented **HiDPI block** near the top; uncomment it and reload i3 (`Super + Shift + R`).
+Si le texte et les icônes paraissent trop petits sur un écran 4K ou à haute résolution, un bloc de configuration **HiDPI** est préparé dans `~/.config/i3/scripts/autostart.sh`.
 
----
-
-## 🎨 Modular Configuration
-
-This i3 setup uses a modular configuration approach for better organization:
-- **config**: Main i3 configuration with includes
-- **workspaces.conf**: Workspace definitions (1-12)
-- **rules.conf**: Window rules, borders, gaps, and scratchpad settings
-- **sxhkd/sxhkdrc**: All keybindings managed by sxhkd for consistency
-
-This modular approach makes it easy to:
-- Understand and modify specific aspects of the configuration
-- Share configurations between different window managers
-- Keep the main config file clean and focused
+Pour l'activer :
+1. Ouvrez `~/.config/i3/scripts/autostart.sh`.
+2. Décommentez les lignes de la section HiDPI.
+3. Rechargez i3 avec **`Super + Maj + R`**.
+4. Ajustez la hauteur et la taille de police dans `~/.config/i3/polybar/config.ini` si nécessaire.
 
 ---
+
+## 🎨 Architecture modulaire
+
+Cette configuration i3 adopte une structure modulaire via des directives d'inclusion (`include`) pour maintenir un code propre et maintenable :
+- **`config`** : Configuration principale i3 (charge les sous-fichiers).
+- **`workspaces.conf`** : Définition des espaces de travail (1 à 12).
+- **`rules.conf`** : Définition des règles de fenêtres, bordures, espaces inter-fenêtres (gaps) et scratchpads.
+- **`sxhkd/sxhkdrc`** : Gestion centralisée et fluide de tous les raccourcis clavier.
+
+Cette séparation simplifie la personnalisation, facilite le partage de modules et garantit une grande lisibilité du projet.
