@@ -69,10 +69,6 @@ echo
 if [ "$ONLY_CONFIG" = false ]; then
     msg "Updating system..."
     sudo apt-get update && sudo apt-get upgrade -y
-
-    # Add butterrepo for picom, rofi and other packages
-    msg "Checking butterrepo..."
-    wget -qO- "https://justaguy.dev/drew/butterscripts/raw/branch/main/setup/add_butterrepo.sh" | bash
 else
     msg "Skipping system update (--only-config mode)"
 fi
@@ -191,11 +187,6 @@ if [ -f "$SCRIPT_DIR/QUICKSTART.md" ]; then
     cp "$SCRIPT_DIR/QUICKSTART.md" "$HOME/QUICKSTART-i3.md"
 fi
 
-# Butterscript helper
-get_script() {
-    wget -qO- "https://justaguy.dev/drew/butterscripts/raw/branch/main/$1" | bash
-}
-
 # Install essential components
 if [ "$ONLY_CONFIG" = false ]; then
     mkdir -p "$TEMP_DIR" && cd "$TEMP_DIR"
@@ -217,15 +208,15 @@ if [ "$ONLY_CONFIG" = false ]; then
 
     msg "Downloading wallpaper directory..."
     if [ ! -d "$CONFIG_DIR/wallpaper" ]; then
-        git clone --depth 1 --progress https://github.com/drewgrif/wallpapers.git "$CONFIG_DIR/wallpaper" || die "Failed to clone wallpapers"
+        git clone --depth 1 --progress git@github.com:Masternaka/Wallpapers.git "$CONFIG_DIR/wallpaper" || die "Failed to clone wallpapers"
         rm -rf "$CONFIG_DIR/wallpaper/.git"
     else
         msg "Wallpaper directory already exists, skipping..."
     fi
 
     msg "Downloading display manager installer..."
-    wget -O "$TEMP_DIR/install_lightdm.sh" "https://justaguy.dev/drew/butterscripts/raw/branch/main/system/install_lightdm.sh"
-    chmod +x "$TEMP_DIR/install_lightdm.sh"
+    wget -O "$TEMP_DIR/install_lightdm.sh" "https://github.com/Masternaka/Masterscripts_Debian/main/system/install_lightdm.sh"
+    chmod +x "$TEMP_DIR/install_lightdm.sh" 
     msg "Running display manager installer..."
     # Run in current terminal session to preserve interactivity
     bash "$TEMP_DIR/install_lightdm.sh"
@@ -236,7 +227,7 @@ if [ "$ONLY_CONFIG" = false ]; then
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         msg "Downloading optional tools installer..."
-        wget -O "$TEMP_DIR/optional_tools.sh" "https://justaguy.dev/drew/butterscripts/raw/branch/main/setup/optional_tools.sh"
+        wget -O "$TEMP_DIR/optional_tools.sh" "https://github.com/Masternaka/Masterscripts_Debian/main/setup/optional_tools.sh"
         chmod +x "$TEMP_DIR/optional_tools.sh"
         msg "Running optional tools installer..."
         # Run in current terminal session to preserve interactivity
